@@ -24,7 +24,7 @@
     replace: 'AllowTcpForwarding yes'
     backup: yes
   when: enable_ssh_tcp_forwarding
-    
+
 - name: disable password login on bastion
   replace:
     path: /etc/ssh/sshd_config
