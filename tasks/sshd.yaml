@@ -1,0 +1,27 @@
+---
+- name: firewall service
+  systemd:
+    name: firewalld
+    enabled: yes
+    state: started
+
+- name: sshd service
+  systemd:
+    name: sshd
+    enabled: yes
+    state: started
+
+- name: disable root login
+  replace:
+    path: /etc/ssh/sshd_config
+    regexp: '^PermitRootLogin.*'
+    replace: 'PermitRootLogin no'
+
+- name: disable password login on bastion
+  replace:
+    path: /etc/ssh/sshd_config
+    regexp: '^PasswordAuthentication.*'
+    replace: 'PasswordAuthentication no'
+  notify:
+    # Restart SSHD after last replacement
+    - restart sshd
