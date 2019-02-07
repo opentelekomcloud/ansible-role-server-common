@@ -1,23 +1,27 @@
 ---
 - name: firewall service
+  become: true
   systemd:
     name: firewalld
     enabled: yes
     state: started
 
 - name: sshd service
+  become: true
   systemd:
     name: sshd
     enabled: yes
     state: started
 
 - name: disable root login
+  become: true
   replace:
     path: /etc/ssh/sshd_config
     regexp: '^PermitRootLogin.*'
     replace: 'PermitRootLogin no'
 
 - name: enable SSH forwarding (tunnel through Bastion)
+  become: true
   replace:
     path: /etc/ssh/sshd_config
     regexp: '^AllowTcpForwarding.*'
@@ -26,6 +30,7 @@
   when: enable_ssh_tcp_forwarding
 
 - name: disable password login on bastion
+  become: true
   replace:
     path: /etc/ssh/sshd_config
     regexp: '^PasswordAuthentication.*'
