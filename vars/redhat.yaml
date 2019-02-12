@@ -5,3 +5,4 @@ packages:
   - python2-openstackclient
   - firewalld
   - openssh-server
+  - cronie
