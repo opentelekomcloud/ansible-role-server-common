@@ -1,5 +1,5 @@
 galaxy_info:
-  role_name: otc_server_common
+  role_name: server_common
   author: Artem Goncharov
   description: Obvious initial setting to be applied to any cloud server
   company: OpenTelekomCloud
