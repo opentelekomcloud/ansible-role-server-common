@@ -17,9 +17,10 @@ Role Variables
 --------------
 
 Available variables are listed below, along with default values (see `defaults/main.yml`):
-  journalctl_max_disk_usage - Maximal disk usage by Journalctl
 
-  enable_ssh_tcp_forwarding - Enable TCP forwarding in SSH configuration
+    journalctl_max_disk_usage - Maximal disk usage by Journalctl
+    
+    enable_ssh_tcp_forwarding - Enable TCP forwarding in SSH configuration
 
 
 Dependencies
