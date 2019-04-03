@@ -18,10 +18,8 @@ Role Variables
 
 Available variables are listed below, along with default values (see `defaults/main.yml`):
 
-    journalctl_max_disk_usage - Maximal disk usage by Journalctl
-    
-    enable_ssh_tcp_forwarding - Enable TCP forwarding in SSH configuration
-
+    journalctl_max_disk_usage: 1G # Maximal disk usage by Journalctl
+    enable_ssh_tcp_forwarding: false # Enable TCP forwarding in SSH configuration
 
 Dependencies
 ------------
@@ -35,7 +33,7 @@ Including an example of how to use your role (for instance, with variables passe
 
     - hosts: bastion
       roles:
-         - { role:otc_server_common, enable_ssh_tcp_forwarding: True}
+         - { role: opentelekomcloud.server_common, enable_ssh_tcp_forwarding: True}
 
 License
 -------
