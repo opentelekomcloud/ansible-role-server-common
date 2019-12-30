@@ -1,17 +1,14 @@
 ---
-- name: firewall service
+- name: Start services
   become: true
   systemd:
-    name: firewalld
+    name: "{{ item }}"
     enabled: yes
     state: started
-
-- name: sshd service
-  become: true
-  systemd:
-    name: sshd
-    enabled: yes
-    state: started
+  loop:
+    - firewalld
+    - sshguard
+    - sshd
 
 - name: disable root login
   become: true
