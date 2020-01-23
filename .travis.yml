@@ -1,0 +1,11 @@
+dist: bionic
+language: python
+cache: pip
+python:
+- '3.7'
+services:
+ - docker
+install:
+ - pip install molecule docker
+script:
+ - molecule test
