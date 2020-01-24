@@ -1,8 +1,11 @@
 ---
 packages:
-  - libselinux-python
-  - mc
+  - libselinux-python3
   - python2-openstackclient
+  - openstack-selinux
   - firewalld
   - openssh-server
+  - sshguard
+  - mc
   - cronie
+  - nano

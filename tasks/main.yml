@@ -1,15 +1,20 @@
 ---
 # tasks file for ansible-role-otc-server-common
-- name: include OS-specific variables.
+- name: Non-fedora redhat setup
   include_vars: redhat.yaml
-  when: 
+  when:
     - ansible_os_family == "RedHat"
     - ansible_distribution != "Fedora"
 
-- include_vars: fedora.yaml
+- name: Fedora setup
+  include_vars: fedora.yaml
   when: ansible_distribution == "Fedora"
 
-- name: install often required packages
+- name: Debian setup
+  include_vars: debian.yaml
+  when: ansible_distribution == "Debian" or ansible_distribution == "Ubuntu"
+
+- name: Install often required packages
   become: true
   package:
     state: present
@@ -17,10 +22,10 @@
   with_items: "{{ packages }}"
   register: task_result
   until: task_result is success
-  retries: 5
+  retries: 1
   delay: 2
 
-- name: disable pwd login for user {{ ansible_user }}
+- name: "Disable pwd login for ansible_user"
   become: true
   user:
     name: "{{ ansible_user }}"
@@ -32,14 +37,14 @@
 - name: Journalctl configuration
   include_tasks: journalctl.yaml
 
-- name: place "/etc/issue" file
+- name: Place "/etc/issue" file
   become: true
   copy:
     src: etc/issue
     dest: /etc/issue
     mode: 0644
 
-- name: place "/etc/motd" file
+- name: Place "/etc/motd" file
   become: true
   copy:
     src: etc/motd
