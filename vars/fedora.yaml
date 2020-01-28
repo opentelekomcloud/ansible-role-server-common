@@ -2,7 +2,7 @@
 packages:
   - libselinux-python3
   - python3-openstackclient
-  - openstack-selinux
+#  - openstack-selinux  # can't be installed on fedora
   - firewalld
   - openssh-server
   - sshguard
