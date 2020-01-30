@@ -2,14 +2,31 @@
 dependency:
   name: galaxy
 driver:
-  name: vagrant
+  name: delegated
+  options:
+    managed: False
+    ansible_connection_options:
+      ansible_ssh_user: linux
+      ansible_python_interpreter: '/usr/bin/env python3'
 lint:
   name: yamllint
 platforms:
-  - name: fedora30-vm
-    box: generic/fedora30
+  - name: 'instance-fedora'
+  - name: 'instance-debian'
+  - name: 'instance-ubuntu'
 provisioner:
   name: ansible
+  inventory:
+    hosts:
+      all:
+        hosts:
+          instance-fedora:
+            ansible_ssh_host: '80.158.32.100'
+          instance-debian:
+            ansible_ssh_host: '80.158.16.122'
+          instance-ubuntu:
+            ansible_ssh_host: '80.158.20.165'
+            ansible_ssh_user: ubuntu
   lint:
     name: ansible-lint
 verifier:
